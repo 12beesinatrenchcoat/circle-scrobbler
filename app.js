@@ -10,15 +10,24 @@ if (token && (!name || !localStorage.getItem('key'))) {
 			localStorage.setItem('name', name);
 			localStorage.setItem('key', key);
 
-			window.name = name;
+			document.getElementById('lastfm-login-status').innerText = 'You are currently logged in as: ' + name + '.';
+			document.getElementById('logout').hidden = false;
 		});
 }
 
-window.name = localStorage.getItem('name') ?? '';
-window.toScrobble = [];
-window.ignored = [];
+// Adding a login link based on what was given in .env
+fetch('./api/getLastFMKey.js')
+	.then(response => response.text())
+	.then(text => {
+		document.getElementById('lastfm-login-link')
+			.setAttribute('href', 'https://last.fm/api/auth/?api_key=' + text);
+	});
 
-document.getElementById('lastfm-login-status').innerText = 'You are currently logged in as: ' + window.name + '.';
+window.name = localStorage.getItem('name') ?? '';
+
+if (window.name) {
+	document.getElementById('lastfm-login-status').innerText = 'You are currently logged in as: ' + window.name + '.';
+}
 
 // Logging out
 const logoutButton = document.getElementById('logout');
@@ -32,6 +41,9 @@ logoutButton.addEventListener('click', () => {
 	localStorage.removeItem('key');
 	window.location.reload();
 });
+
+window.toScrobble = [];
+window.ignored = [];
 
 // Getting a user's recent osu! plays
 document.getElementById('get-recent-osu-plays').addEventListener('submit', event => {
