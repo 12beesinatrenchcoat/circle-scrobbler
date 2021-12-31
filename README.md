@@ -3,6 +3,8 @@
 ![XO code style](https://flat.badgen.net/badge/code%20style/XO/cyan)
 ![Badge count](https://img.shields.io/badge/badges-too%20many-informational?style=flat-square)
 
+> **Note/Disclaimer/Thing:** No, I'm not associated with ppy, the osu!team, or anyone of the sort. I'm just some random person on the internet.
+
 [osu!](https://osu.ppy.sh) used to have a [Last.fm](https://last.fm) scrobbling function (which is how I found out about last.fm in the first place.) Anyways, the feature no longer exists… so I tried to hack something together myself. I have no idea what I'm doing. **Use at your own risk.**
 
 # How does it work?
@@ -16,7 +18,7 @@
 - Honestly there's probably just a bajillion things in this that are written poorly, insecure, or just bad. Sorry about that.
 
 # For normal users:
-Check out [osu-lastfm-scrobbler.vercel.app](osu-lastfm-scrobbler.vercel.app).
+Check out [osu-lastfm-scrobbler.vercel.app](https://osu-lastfm-scrobbler.vercel.app).
 
 # If you want to contribute for some reason:
 This was built with [Vercel. So you should probably install the CLI.](https://vercel.com/cli)
@@ -39,4 +41,4 @@ And, y'know, fill those keys in.
 Run `npm i`, then `vercel dev`, and go to the link Vercel gives you in your browser of choice.
 
 # License
-[MIT License](./LICENSE).
+Code is under the [MIT License](./LICENSE). [Mode icons](./icons) are under [CC-BY-NC 4.0](./icons/LICENSE.md). 
