@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>osu-lastfm-scrobbler</title>
+	<link rel="stylesheet" href="style.css">
+	<script defer src="./app.js"></script>
+
+</head>
+<body>
+<h1>Scrobble to last.fm based on your recent plays on osu!</h1>
+
+<div>
+	<p>First, log into last.fm: <a href="https://last.fm/api/auth/?api_key=bc81808782d9d9df2ab29856943da723">click me</a>!</p>
+	<p id="lastfm-login-status">You are currently not logged in.</p>
+	<button hidden id="logout">log out?</button>
+</div>
+
+<form id="get-recent-osu-plays">
+	<label for="osu-username">osu username</label>
+	<input id="osu-username" name="osu_username" type="text" placeholder="idk man" minlength="3" maxlength="15">
+	<fieldset>
+		<legend>Modes</legend>
+		<input type="checkbox" id="osu" name="mode" value="osu">
+		<label for="osu" class="osu">osu!</label>
+		<input type="checkbox" id="taiko" name="mode" value="taiko">
+		<label for="taiko" class="taiko">osu!taiko</label>
+		<input type="checkbox" id="mania" name="mode" value="mania">
+		<label for="mania" class="mania">osu!mania</label>
+		<input type="checkbox" id="fruits" name="mode" value="fruits">
+		<label for="fruits" class="fruits">osu!catch</label>
+	</fieldset>
+	<button type="submit">fetch recent plays</button>
+</form>
+
+<hr>
+
+<label><input type="checkbox" id="use-unicode">Prefer metadata in original language</label>
+
+<div id="scores">
+	No scores yet…
+</div>
+
+<button id="scrobble">scrobble!</button>
+</body>
+</html>

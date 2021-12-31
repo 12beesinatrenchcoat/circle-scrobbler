@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+	font-family: Torus, Inter, Helvetica Neue, Arial, sans-serif;
+	background: rgb(42, 34, 38);
+	color: white;
+	max-width: 96ch;
+	margin: 2em;
+}
+
+@media (min-width: 960px) {
+	body {
+		margin: 2em auto;
+	}
+}
+
+@media (max-width: 720px) {
+	.info > img {
+		display: none;
+	}
+}
+
+a {
+	display: inline-block;
+	color: #fde
+}
+
+a:hover {
+	color: white;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.score {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: rgb(56, 46, 50);
+	border-radius: 10px;
+	height: 5em; /* enough for about 3 lines */
+}
+
+.score + .score {
+	margin-top: 0.3em;
+}
+
+.info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.lines {
+	display: flex;
+	flex-direction: column;
+	margin-left: 1ch
+}
+
+.line {
+	min-height: 1.2em;
+	line-height: 1.2;
+	overflow-x: hidden;
+}
+
+.info > img {
+	width: 12ch;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 10px;
+}
+
+.delete {
+	background-color: hsl(356, 41%, 50%);
+	width: 4ch;
+	border-radius: 10px;
+	border: none;
+}
+
+.delete:hover {
+	background-color: hsl(356, 83%, 50%);
+}
+
+.delete:active{
+	background-color: hsl(356, 83%, 80%);
+}
+
+/* icons, i guess */
+.osu:before, .taiko:before, .fruits:before, .mania:before {
+	display: inline-block;
+	height: 1em; width: 1em;
+	vertical-align: -0.1em;
+	margin-right: 0.25em;
+}
+
+.osu:before {
+	content: url('icons/osu.svg');
+}
+
+.taiko:before {
+	content: url('icons/taiko.svg');
+}
+
+.fruits:before {
+	content: url('icons/fruits.svg');
+}
+
+.mania:before {
+	content: url('icons/mania.svg');
+}
