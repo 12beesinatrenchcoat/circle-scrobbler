@@ -1,7 +1,7 @@
 {
-  "name": "osu-lastfm-scrobbler",
+  "name": "circle-scrobbler",
   "version": "0.0.0",
-  "description": "scrobbling tracks to last.fm based on an osu! player's recent plays",
+  "description": "an attempt to scrobble recent plays from osu! to last.fm",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/12beesinatrenchcoat/osu-lastfm-scrobbler.git"
+    "url": "git+https://github.com/12beesinatrenchcoat/circle-scrobbler.git"
   },
   "keywords": [
     "osu",
     "last-fm"
   ],
   "author": "12beesinatrenchcoat",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/12beesinatrenchcoat/osu-lastfm-scrobbler/issues"
+    "url": "https://github.com/12beesinatrenchcoat/circle-scrobbler/issues"
   },
-  "homepage": "https://github.com/12beesinatrenchcoat/osu-lastfm-scrobbler#readme",
+  "homepage": "https://github.com/12beesinatrenchcoat/circle-scrobbler#readme",
   "devDependencies": {
     "eslint": "^8.4.1",
     "eslint-config-xo": "^0.39.0"

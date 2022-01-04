@@ -1,5 +1,5 @@
-# osu-lastfm-scrobbler
-![GitHub last commit](https://img.shields.io/github/last-commit/12beesinatrenchcoat/osu-lastfm-scrobbler?style=flat-square)
+# circle-scrobbler
+![GitHub last commit](https://img.shields.io/github/last-commit/12beesinatrenchcoat/circle-scrobbler?style=flat-square)
 ![XO code style](https://flat.badgen.net/badge/code%20style/XO/cyan)
 ![Badge count](https://img.shields.io/badge/badges-too%20many-informational?style=flat-square)
 
@@ -18,7 +18,7 @@
 - Honestly there's probably just a bajillion things in this that are written poorly, insecure, or just bad. Sorry about that.
 
 # For normal users:
-Check out [osu-lastfm-scrobbler.vercel.app](https://osu-lastfm-scrobbler.vercel.app).
+Check out [circle-scrobbler.vercel.app](https://circle-scrobbler.vercel.app).
 
 # If you want to contribute for some reason:
 This was built with [Vercel. So you should probably install the CLI.](https://vercel.com/cli)
