@@ -1,6 +1,7 @@
 const params = (new URL(document.location)).searchParams;
 const token = params.get('token');
 
+// Authenticating with Last.fm. Handles "?token"
 if (token && (!name || !localStorage.getItem('key'))) {
 	fetch('./api/obtainLastFMSessionKey.js?token=' + token)
 		.then(response => response.json())
@@ -10,27 +11,26 @@ if (token && (!name || !localStorage.getItem('key'))) {
 			localStorage.setItem('name', name);
 			localStorage.setItem('key', key);
 
-			document.getElementById('lastfm-login-status').innerText = 'You are currently logged in as: ' + name + '.';
-			document.getElementById('logout').hidden = false;
+			postLastfmLogin(name);
 		});
 }
 
-// Adding a login link based on what was given in .env
-fetch('./api/getLastFMKey.js')
-	.then(response => response.text())
-	.then(text => {
-		document.getElementById('lastfm-login-link')
-			.setAttribute('href', 'https://last.fm/api/auth/?api_key=' + text);
-	});
+const lastfmName = localStorage.getItem('name') ?? '';
 
-window.name = localStorage.getItem('name') ?? '';
-
-if (window.name) {
-	document.getElementById('lastfm-login-status').innerText = 'You are currently logged in as: ' + window.name + '.';
+if (lastfmName) {
+	postLastfmLogin(lastfmName);
+} else {
+	// Adding a login link based on what was given in .env
+	fetch('./api/getLastFMKey.js')
+		.then(response => response.text())
+		.then(text => {
+			document.getElementById('lastfm-login-link')
+				.setAttribute('href', 'https://last.fm/api/auth/?api_key=' + text);
+		});
 }
 
 // Logging out
-const logoutButton = document.getElementById('logout');
+const logoutButton = document.getElementById('lastfm-logout');
 
 if (localStorage.getItem('name') && localStorage.getItem('key')) {
 	logoutButton.hidden = false;
@@ -44,6 +44,26 @@ logoutButton.addEventListener('click', () => {
 
 window.toScrobble = [];
 window.ignored = [];
+
+// Display of user info after logging into Last.fm.
+function postLastfmLogin(username) {
+	// "log into last.fm" link turns to link to user profile
+	const lastfmApiKey = fetch('./api/getLastFMKey.js');
+	const loginLink = document.getElementById('lastfm-login-link');
+	loginLink.innerText = username;
+	loginLink.href = 'https://last.fm/user/' + username;
+
+	Promise.resolve(lastfmApiKey)
+		.then(response => response.text())
+		.then(key => {
+			fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=${username}&api_key=${key}&format=json`)
+				.then(response => response.json())
+				.then(json => {
+					const imgElement = document.getElementById('lastfm-user-image');
+					imgElement.setAttribute('src', json.user.image[2]['#text']);
+				});
+		});
+}
 
 // Getting a user's recent osu! plays
 document.getElementById('get-recent-osu-plays').addEventListener('submit', event => {
@@ -68,7 +88,6 @@ document.getElementById('get-recent-osu-plays').addEventListener('submit', event
 			plays.every(play => {
 				const {beatmap, beatmapset, created_at: createdAt} = play;
 				const timestamp = Math.round(new Date(createdAt).getTime() / 1000) - beatmap.hit_length;
-				console.log(timestamp, latestTimestamp);
 
 				if (timestamp <= latestTimestamp) {
 					return false;
@@ -86,6 +105,10 @@ document.getElementById('get-recent-osu-plays').addEventListener('submit', event
 
 				return true;
 			});
+			if (window.toScrobble) {
+				document.getElementById('scrobble-top').hidden = false;
+				document.getElementById('status').innerText = window.toScrobble.length + ' plays loaded!';
+			}
 		})
 		.catch(error => console.log(error));
 });
@@ -187,28 +210,30 @@ document.getElementById('use-unicode').addEventListener('change', event => {
 	}
 });
 
-// The scrobble button!
-document.getElementById('scrobble').addEventListener('click', () => {
-	const sk = localStorage.getItem('key'); // Session Key.
+// The scrobble button(s)!
+document.querySelectorAll('#scrobble, #scrobble-top').forEach(button => {
+	button.addEventListener('click', () => {
+		const sk = localStorage.getItem('key'); // Session Key.
 
-	console.log('scrobbling!');
-	// Whether to use Unicode characters is based on the "Prefer metadata in original language" checkbox
-	const toScrobble = document.getElementById('use-unicode').checked
-		? window.toScrobble.map(({artistUnicode, trackUnicode, duration, timestamp}) => ({artist: artistUnicode, track: trackUnicode, duration, timestamp}))
-		: window.toScrobble.map(({artist, track, duration, timestamp}) => ({artist, track, duration, timestamp}));
+		console.log('scrobbling!');
+		// Whether to use Unicode characters is based on the "Prefer metadata in original language" checkbox
+		const toScrobble = document.getElementById('use-unicode').checked
+			? window.toScrobble.map(({artistUnicode, trackUnicode, duration, timestamp}) => ({artist: artistUnicode, track: trackUnicode, duration, timestamp}))
+			: window.toScrobble.map(({artist, track, duration, timestamp}) => ({artist, track, duration, timestamp}));
 
-	fetch('./api/scrobbleTrack.js', {
-		method: 'POST',
-		body: JSON.stringify({toScrobble, sk}),
-	})
-		.then(response => console.log(response))
-		.then(() => {
-			document.getElementById('scores').innerHTML = '';
-			// Used to filter already-scrobbled recent plays.
-			localStorage.setItem('latestTimestamp', window.toScrobble[0].timestamp);
-			window.toScrobble = [];
+		fetch('./api/scrobbleTrack.js', {
+			method: 'POST',
+			body: JSON.stringify({toScrobble, sk}),
 		})
-		.catch(error => {
-			console.error(error);
-		});
+			.then(response => console.log(response))
+			.then(() => {
+				document.getElementById('scores').innerHTML = '';
+				// Used to filter already-scrobbled recent plays.
+				localStorage.setItem('latestTimestamp', window.toScrobble[0].timestamp);
+				window.toScrobble = [];
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	});
 });

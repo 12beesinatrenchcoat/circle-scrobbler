@@ -17,16 +17,22 @@
 	<meta name="theme-color" content="#ea3b59">
 </head>
 <body>
-<h1>Scrobble to last.fm based on your recent plays on osu!</h1>
-
-<div>
-	<p>First, log into last.fm: <a id="lastfm-login-link">click me</a>!</p>
-	<p id="lastfm-login-status">You are currently not logged in.</p>
-	<button hidden id="logout">log out?</button>
-</div>
+<nav>
+	<span>
+		<img id='logo' src="favicon.svg" alt="circle scrobbler icon">
+		<p id="status">no plays loaded…</p>
+		<button id="scrobble-top" hidden>scrobble!</button>
+	</span>
+	<span>
+		<button id="lastfm-logout" hidden>log out</button>
+		<a id="lastfm-login-link">log into last.fm</a>
+		<img src="" id="lastfm-user-image">
+	</span>
+</nav>
+<h1>circle scrobbler!</h1>
 
 <form id="get-recent-osu-plays">
-	<label for="osu-username">osu username</label>
+	<label for="osu-username">osu! username</label>
 	<input id="osu-username" name="osu_username" type="text" placeholder="idk man" minlength="3" maxlength="15">
 	<fieldset>
 		<legend>Modes</legend>

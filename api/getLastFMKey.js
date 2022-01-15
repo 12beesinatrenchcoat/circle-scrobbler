@@ -1,4 +1,4 @@
-// Literally just giving the user the Last.fm API key, used in authentication.
+/* Literally just giving the user the Last.fm API key, used in authentication. */
 import dotenv from 'dotenv';
 dotenv.config();
 
