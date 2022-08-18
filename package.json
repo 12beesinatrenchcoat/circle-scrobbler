@@ -28,6 +28,6 @@
   "dependencies": {
     "dotenv": "16.0.1",
     "md5": "2.3.0",
-    "node-fetch": "3.2.9"
+    "node-fetch": "3.2.10"
   }
 }
