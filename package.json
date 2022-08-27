@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/12beesinatrenchcoat/circle-scrobbler#readme",
   "devDependencies": {
-    "eslint": "8.22.0",
+    "eslint": "8.23.0",
     "eslint-config-xo": "0.42.0"
   },
   "dependencies": {
