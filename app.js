@@ -22,10 +22,11 @@ if (lastfmName) {
 } else {
 	// Adding a login link based on what was given in .env
 	fetch('./api/getLastFMKey.js')
-		.then(response => response.text())
-		.then(text => {
+		.then(response => response.json())
+		.then(json => {
+			const [key, callback] = json;
 			document.getElementById('lastfm-login-link')
-				.setAttribute('href', 'https://last.fm/api/auth/?api_key=' + text);
+				.setAttribute('href', `https://last.fm/api/auth/?api_key=${key}&cb=${callback}`);
 		});
 }
 

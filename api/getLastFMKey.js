@@ -2,8 +2,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const {LAST_FM_KEY} = process.env;
+const {LAST_FM_KEY, LAST_FM_CALLBACK} = process.env;
 
 export default async function handler(request, response) {
-	response.status(200).send(LAST_FM_KEY);
+	response.status(200).send([LAST_FM_KEY, LAST_FM_CALLBACK]);
 }

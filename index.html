@@ -1,61 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>circle-scrobbler</title>
-	<link rel="stylesheet" href="style.css">
-	<script defer src="./app.js"></script>
-	<!-- favicons -->
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ea3b59">
-	<meta name="msapplication-TileColor" content="#ea3b59">
-	<meta name="theme-color" content="#ea3b59">
-</head>
-<body>
-<nav>
-	<span>
-		<img id='logo' src="favicon.svg" alt="circle scrobbler icon">
-		<p id="status">no plays loaded…</p>
-		<button id="scrobble-top" hidden>scrobble!</button>
-	</span>
-	<span>
-		<button id="lastfm-logout" hidden>log out</button>
-		<a id="lastfm-login-link">log into last.fm</a>
-		<img src="" id="lastfm-user-image">
-	</span>
-</nav>
-<h1>circle scrobbler!</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>circle-scrobbler</title>
+		<link rel="stylesheet" href="style.css" />
+		<script defer src="./app.js"></script>
+		<!-- favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ea3b59" />
+		<meta name="msapplication-TileColor" content="#ea3b59" />
+		<meta name="theme-color" content="#ea3b59" />
+	</head>
+	<body>
+		<nav>
+			<span>
+				<img id="logo" src="favicon.svg" alt="circle scrobbler icon" />
+				<p id="status">no plays loaded…</p>
+				<button id="scrobble-top" hidden>scrobble!</button>
+			</span>
+			<span>
+				<button id="lastfm-logout" hidden>log out</button>
+				<a id="lastfm-login-link">log into last.fm</a>
+				<img src="" id="lastfm-user-image" />
+			</span>
+		</nav>
+		<h1>circle scrobbler!</h1>
 
-<form id="get-recent-osu-plays">
-	<label for="osu-username">osu! username</label>
-	<input id="osu-username" name="osu_username" type="text" placeholder="idk man" minlength="3" maxlength="15">
-	<fieldset>
-		<legend>Modes</legend>
-		<input type="checkbox" id="osu" name="mode" value="osu">
-		<label for="osu" class="osu">osu!</label>
-		<input type="checkbox" id="taiko" name="mode" value="taiko">
-		<label for="taiko" class="taiko">osu!taiko</label>
-		<input type="checkbox" id="mania" name="mode" value="mania">
-		<label for="mania" class="mania">osu!mania</label>
-		<input type="checkbox" id="fruits" name="mode" value="fruits">
-		<label for="fruits" class="fruits">osu!catch</label>
-	</fieldset>
-	<button type="submit">fetch recent plays</button>
-</form>
+		<div style="border: 2px solid white; padding: 1em; margin: 2em 0">
+			<p><strong>hey! this version is deprecated!</strong></p>
+			<p>
+				this is the old version of circle scrobbler. it hasn't been updated in
+				years. it's also just really bad. the new one can be found at
+				<a href="https://circlescrobbler.glasseater.moe"
+					>https://circlescrobbler.glasseater.moe</a
+				>.
+			</p>
+		</div>
 
-<hr>
+		<form id="get-recent-osu-plays">
+			<label for="osu-username">osu! username</label>
+			<input
+				id="osu-username"
+				name="osu_username"
+				type="text"
+				placeholder="idk man"
+				minlength="3"
+				maxlength="15"
+			/>
+			<fieldset>
+				<legend>Modes</legend>
+				<input type="checkbox" id="osu" name="mode" value="osu" />
+				<label for="osu" class="osu">osu!</label>
+				<input type="checkbox" id="taiko" name="mode" value="taiko" />
+				<label for="taiko" class="taiko">osu!taiko</label>
+				<input type="checkbox" id="mania" name="mode" value="mania" />
+				<label for="mania" class="mania">osu!mania</label>
+				<input type="checkbox" id="fruits" name="mode" value="fruits" />
+				<label for="fruits" class="fruits">osu!catch</label>
+			</fieldset>
+			<button type="submit">fetch recent plays</button>
+		</form>
 
-<label><input type="checkbox" id="use-unicode">Prefer metadata in original language</label>
+		<hr />
 
-<div id="scores">
-	No scores yet…
-</div>
+		<label
+			><input type="checkbox" id="use-unicode" />Prefer metadata in original
+			language</label
+		>
 
-<button id="scrobble">scrobble!</button>
-</body>
+		<div id="scores">No scores yet…</div>
+
+		<button id="scrobble">scrobble!</button>
+	</body>
 </html>
